@@ -1,0 +1,13 @@
+{
+    "name": "alexwinder/laravel-confirm-new-email",
+    "description": "A Laravel 5 package which makes a user verify their email address when updated.",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Alex Winder",
+            "email": "contact@alexwinder.uk"
+        }
+    ],
+    "minimum-stability": "dev",
+    "require": {}
+}
