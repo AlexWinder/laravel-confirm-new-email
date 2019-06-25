@@ -1,13 +1,18 @@
 {
     "name": "alexwinder/laravel-confirm-new-email",
     "description": "A Laravel 5 package which makes a user verify their email address when updated.",
+    "keywords": ["laravel", "illuminate", "auth", "verification", "email", "update"],
     "license": "MIT",
     "authors": [
         {
             "name": "Alex Winder",
-            "email": "contact@alexwinder.uk"
+            "email": "contact@alexwinder.uk",
+            "homepage": "https://www.alexwinder.uk/",
+            "role": "Developer"
         }
     ],
     "minimum-stability": "dev",
-    "require": {}
+    "require": {
+        "illuminate/support": "~5.0"
+    }
 }
