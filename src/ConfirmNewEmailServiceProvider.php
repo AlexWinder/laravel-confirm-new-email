@@ -13,7 +13,10 @@ class ConfirmNewEmailServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        //
+        // Merge config file
+        $this->mergeConfigFrom(
+            __DIR__ . '/config/config.php', 'confirm-new-email'
+        );
     }
 
     /**
@@ -23,6 +26,12 @@ class ConfirmNewEmailServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-       $this->loadRoutesFrom(__DIR__ . '/routes.php');
+        // Publish config file
+        $this->publishes([
+            __DIR__ . '/config/config.php' => config_path('confirm-new-email.php'),
+        ]);
+
+        // Register routes
+        $this->loadRoutesFrom(__DIR__ . '/routes.php');
     }
 }
