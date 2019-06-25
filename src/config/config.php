@@ -23,5 +23,12 @@ return [
             'uri' => '/settings/email/edit',
             'name' => 'confirm-new-email.edit',
         ],
+        /**
+         * The update route is that which is used to update the users email address.
+         */
+        'update' => [
+            'uri' => '/settings/email/edit',
+            'name' => 'confirm-new-email.update',
+        ],
     ],
 ];
