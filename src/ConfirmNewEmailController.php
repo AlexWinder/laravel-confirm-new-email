@@ -16,4 +16,12 @@ class ConfirmNewEmailController extends Controller
     {
         return view('confirm-new-email::email-edit');
     }
+
+    /**
+     * Update method - WIP.
+     */
+    public function update()
+    {
+        
+    }
 }
