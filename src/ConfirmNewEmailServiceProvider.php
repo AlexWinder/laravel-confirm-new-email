@@ -31,6 +31,9 @@ class ConfirmNewEmailServiceProvider extends ServiceProvider
             __DIR__ . '/config/config.php' => config_path('confirm-new-email.php'),
         ]);
 
+        // Register views
+        $this->loadViewsFrom(__DIR__.'/views', 'confirm-new-email');
+
         // Register routes
         $this->loadRoutesFrom(__DIR__ . '/routes.php');
     }
