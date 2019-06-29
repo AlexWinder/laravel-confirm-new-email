@@ -11,7 +11,7 @@
                     <p>Your e-mail address is currently: {{ auth()->user()->email }}.</p>
                     <p>You can update your e-mail address using the form on this page. Please note that you will receive a link to your new e-mail address which must be confirmed to complete the update of your e-mail address.</p>
 
-                    <form method="POST" action="{{ route(config('confirm-new-email.route.update.name')) }}">
+                    <form method="POST" action="{{ route(config('confirm-new-email.route.update-request.name')) }}">
                         @csrf
 
                         <div class="form-group row">
