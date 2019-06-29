@@ -18,6 +18,14 @@ class ConfirmNewEmailController extends Controller
     }
 
     /**
+     * Request new email method - WIP.
+     */
+    public function requestNewEmail()
+    {
+        
+    }
+
+    /**
      * Update method - WIP.
      */
     public function update()
