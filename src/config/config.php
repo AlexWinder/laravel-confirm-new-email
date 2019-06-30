@@ -25,19 +25,47 @@ return [
             'name' => 'confirm-new-email.edit',
         ],
         /**
-         * The update-request route is that which is used to request an update to the users email address.
+         * The update-request route is that which is used to request an update to the
+         * users email address.
          */
         'update-request' => [
             'uri' => '/settings/email/edit',
             'name' => 'confirm-new-email.update-request',
         ],
         /**
-         * The update-confirm route is that which is used to confirm the update to the users email address.
-         * The URI value set here should not match the URI value of any other route.
+         * The update-confirm route is that which is used to confirm the update to the
+         * users email address. The URI value set here should not match the URI value
+         * of any other route.
          */
         'update-confirm' => [
             'uri' => '/settings/email/update',
             'name' => 'confirm-new-email.update-confirm',
         ],
+    ],
+
+    /*
+    |--------------------------------------------------------------------------
+    | Update Expiry Settings
+    |--------------------------------------------------------------------------
+    |
+    | These values relate to if the update has an expiry. If so then the user
+    | must confirm their updated email within this time limit to complete
+    | the update. The update-expiry.enabled value must be set to true
+    | for the update-expiry.limit value to specify the number of minutes
+    | for the update to expire.
+    |
+    */
+    'update-expiry' => [
+        /**
+         * If set to true then the update-expiry.limit value will be used to set an
+         * expiry on the update to the email address.
+         */
+        'enabled' => true,
+        /**
+         * The limit is the number of minutes that the update expires in, if the
+         * update-expiry.enabled value is set to true. If this is set to 0
+         * then the update-expiry will be disabled.
+         */
+        'limit' => 60,
     ],
 ];
