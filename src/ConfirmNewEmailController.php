@@ -74,8 +74,38 @@ class ConfirmNewEmailController extends Controller
     /**
      * Update method - WIP.
      */
-    public function update()
+    public function update(Request $request)
     {
-        
+        // Check for a valid URL signature
+        if(!$request->hasValidSignature()) 
+        {
+            abort(403);
+        }
+
+        // Verify that the logged in user matches the old email
+        if(auth()->user()->email != $request->old_email)
+        {
+            abort(403, 'Your e-mail address already appears to have been updated. If you wish to attempt to update your e-mail address again please request a new update link.');
+        }
+
+        // Check that the new email doesn't exist in the database
+        $user = config('auth.providers.users.model');
+        if($user::where(config('confirm-new-email.user.fields.email'), '=', $request->new_email)->exists())
+        {
+            abort(403, 'Your new e-mail address appears to be in use. If you wish to attempt to update your e-mail address again please request a new update link.');
+        }
+
+        // Check that the old email address could be found
+        if(!$user::where(config('confirm-new-email.user.fields.email'), '=', $request->old_email)->exists())
+        {
+            abort(403, 'Your e-mail address already appears to have been updated. If you wish to attempt to update your e-mail address again please request a new update link.');
+        }
+
+        // Proceed with updating the users email address
+        $user::where(config('confirm-new-email.user.fields.email'), $request->old_email)
+                ->first()
+                ->update([
+                    config('confirm-new-email.user.fields.email') => $request->new_email,
+                ]);
     }
 }
