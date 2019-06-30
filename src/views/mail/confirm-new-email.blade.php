@@ -6,7 +6,7 @@ You are receiving this e-mail as you have submitted a request to update the e-ma
 Please click on the button below to update your e-mail address to {{ $new_email }}.
 
 @if(config('confirm-new-email.update-expiry.enabled') && config('confirm-new-email.update-expiry.limit') > 0)
-Please note that this button will expire in {{ config('confirm-new-email.update-expiry.limit') }} minutes.
+Please note that this button will expire in {{ config('confirm-new-email.update-expiry.limit') }} {{ str_plural('minute', config('confirm-new-email.update-expiry.limit')) }}.
 @endif
 
 @component('mail::button', ['url' => $url])
