@@ -12,13 +12,37 @@ class ConfirmNewEmailNotification extends Notification
     use Queueable;
 
     /**
+     * The URL to confirm the new email address.
+     *
+     * @var string
+     */
+    public $url;
+
+    /**
+     * The new email address.
+     *
+     * @var string
+     */
+    public $new_email;
+
+    /**
+     * The old email address.
+     *
+     * @var string
+     */
+    public $old_email;
+
+    /**
      * Create a new notification instance.
      *
-     * @return void
+     * @param string $url
+     * @param array $parameters
      */
-    public function __construct()
+    public function __construct($url, $parameters)
     {
-        //
+        $this->url = $url;
+        $this->old_email = $parameters['old_email'];
+        $this->new_email = $parameters['new_email'];
     }
 
     /**
@@ -41,9 +65,12 @@ class ConfirmNewEmailNotification extends Notification
     public function toMail($notifiable)
     {
         return (new MailMessage)
-                    ->line('The introduction to the notification.')
-                    ->action('Notification Action', url('/'))
-                    ->line('Thank you for using our application!');
+                    ->subject('Confirm New E-Mail')
+                    ->markdown('confirm-new-email::mail.confirm-new-email', [
+                        'url' => $this->url,
+                        'old_email' => $this->old_email,
+                        'new_email' => $this->new_email,
+                    ]);
     }
 
     /**
