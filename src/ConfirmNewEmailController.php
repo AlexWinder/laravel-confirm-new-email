@@ -2,8 +2,10 @@
 
 namespace AlexWinder\ConfirmNewEmail;
 
+use AlexWinder\ConfirmNewEmail\ConfirmNewEmailNotification;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Notification;
 use Illuminate\Support\Facades\URL;
 
 class ConfirmNewEmailController extends Controller
@@ -19,10 +21,23 @@ class ConfirmNewEmailController extends Controller
     }
 
     /**
-     * Request new email method - WIP.
+     * User has requested an update to their email address, send notification to new email.
      */
     public function requestNewEmail(Request $request)
     {
+        $user_table = config('auth.providers.users.table');
+        $email_field = config('confirm-new-email.user.fields.email');
+
+        // Validate the new email
+        $request->validate([
+            'new_email' => [
+                'required',
+                'string',
+                'unique:' . $user_table . ',' . $email_field,
+                'max:255',
+            ],
+        ]);
+        
         // The parameters to be sent into the signed URL
         $parameters = [
             'user' => auth()->id(),
@@ -44,6 +59,16 @@ class ConfirmNewEmailController extends Controller
                 $parameters
             );
         };
+
+        // Send an email notification to the new email address
+        Notification::route('mail', $request->new_email)
+                        ->notify(new ConfirmNewEmailNotification($url, $parameters));
+
+        // Set session flash message
+        session()->flash('status', 'An e-mail notification has been sent to your new e-mail address to confirm this request.');
+
+        // Redirect back
+        return back();
     }
 
     /**
