@@ -11,6 +11,6 @@ Route::post(config('confirm-new-email.route.update-request.uri'), '\AlexWinder\C
     ->middleware(['web', 'auth']);
 
 // Route which is used to confirm the update to a users email address
-Route::post(config('confirm-new-email.route.update-confirm.uri'), '\AlexWinder\ConfirmNewEmail\ConfirmNewEmailController@update')
+Route::get(config('confirm-new-email.route.update-confirm.uri'), '\AlexWinder\ConfirmNewEmail\ConfirmNewEmailController@update')
     ->name(config('confirm-new-email.route.update-confirm.name'))
     ->middleware(['web', 'auth']);
