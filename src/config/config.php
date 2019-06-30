@@ -68,4 +68,27 @@ return [
          */
         'limit' => 60,
     ],
+
+    /*
+    |--------------------------------------------------------------------------
+    | User Settings
+    |--------------------------------------------------------------------------
+    |
+    | These values relate to settings of the user which is having their e-mail
+    | address updated. In addition to these please also ensure that the 
+    | auth.providers.users config values are set. Please see README for
+    | further details.
+    |
+    */
+    'user' => [
+        /**
+         * Specific fields of the database which are to be used to be updated.
+         */
+        'fields' => [
+            /**
+             * The field of the user table which stores the email address.
+             */
+            'email' => 'email'
+        ],
+    ],
 ];
