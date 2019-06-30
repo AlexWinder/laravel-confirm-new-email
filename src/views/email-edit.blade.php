@@ -8,6 +8,12 @@
                 <div class="card-header">Update E-Mail Address</div>
 
                 <div class="card-body">
+                    @if (session('status'))
+                        <div class="alert alert-success" role="alert">
+                            {{ session('status') }}
+                        </div>
+                    @endif
+
                     <p>Your e-mail address is currently: {{ auth()->user()->email }}.</p>
                     <p>You can update your e-mail address using the form on this page. Please note that you will receive a link to your new e-mail address which must be confirmed to complete the update of your e-mail address.</p>
 
