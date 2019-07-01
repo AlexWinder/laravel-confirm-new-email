@@ -5,6 +5,7 @@ namespace AlexWinder\ConfirmNewEmail;
 use AlexWinder\ConfirmNewEmail\ConfirmNewEmailNotification;
 use AlexWinder\ConfirmNewEmail\EmailUpdatedNotification;
 use App\Http\Controllers\Controller;
+use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Notification;
 use Illuminate\Support\Facades\URL;
@@ -63,15 +64,20 @@ class ConfirmNewEmailController extends Controller
             );
         };
 
-        // Send an email notification to the new email address
-        Notification::route('mail', $request->new_email)
-                        ->notify(new ConfirmNewEmailNotification($url, $parameters));
+        try 
+        {
+            // Send an email notification to the new email address
+            Notification::route('mail', $request->new_email)
+                            ->notify(new ConfirmNewEmailNotification($url, $parameters));
 
-        // Set session flash message
-        session()->flash('status', 'An e-mail notification has been sent to your new e-mail address to confirm this request.');
+            // Set session flash message
+            session()->flash('status', 'An e-mail notification has been sent to your new e-mail address to confirm this request.');
 
-        // Redirect back
-        return back();
+            // Redirect back
+            return back();
+        } catch(Exception $e) {
+            abort(503, 'We were unable to send an e-mail notification of your request.');
+        }
     }
 
     /**
@@ -106,24 +112,29 @@ class ConfirmNewEmailController extends Controller
             abort(403, 'Your e-mail address already appears to have been updated. If you wish to attempt to update your e-mail address again please request a new update link.');
         }
 
-        // Proceed with updating the users email address
-        $user::where(config('confirm-new-email.user.fields.email'), $request->old_email)
-                ->first()
-                ->update([
-                    config('confirm-new-email.user.fields.email') => $request->new_email,
-                ]);
+        try
+        {
+            // Proceed with updating the users email address
+            $user::where(config('confirm-new-email.user.fields.email'), $request->old_email)
+            ->first()
+            ->update([
+                config('confirm-new-email.user.fields.email') => $request->new_email,
+            ]);
 
-        // Send an email notification to the new email address
-        Notification::route('mail', [
-                            $request->new_email,
-                            $request->old_email,
-                        ])
-                        ->notify(new EmailUpdatedNotification($request));
-        
-        // Set session flash message
-        session()->flash('status', 'Your e-mail address has been updated.');
-        
-        // Redirect the user
-        return redirect()->route(config('confirm-new-email.route.edit.name'));
+            // Send an email notification to the new email address
+            Notification::route('mail', [
+                                $request->new_email,
+                                $request->old_email,
+                            ])
+                            ->notify(new EmailUpdatedNotification($request));
+
+            // Set session flash message
+            session()->flash('status', 'Your e-mail address has been updated.');
+
+            // Redirect the user
+            return redirect()->route(config('confirm-new-email.route.edit.name'));
+        } catch(Exception $e) {
+            abort(503, 'We were unable to update your e-mail address.');
+        }
     }
 }
