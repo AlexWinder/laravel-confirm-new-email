@@ -1,12 +1,9 @@
 @component('mail::message')
-# Introduction
+# E-Mail Address Updated
 
-The body of your message.
+You are receiving this email as you have updated the email address on your account from {{ $old_email }} to {{ $new_email }}. 
 
-@component('mail::button', ['url' => ''])
-Button Text
-@endcomponent
+If you did not request this action then please contact a system administrator immediately.
 
-Thanks,<br>
-{{ config('app.name') }}
+[{{ config('app.name') }}]({{ url(config('app.url')) }})
 @endcomponent
