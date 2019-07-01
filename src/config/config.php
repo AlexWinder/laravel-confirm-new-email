@@ -4,6 +4,25 @@ return [
 
     /*
     |--------------------------------------------------------------------------
+    | Redirect Settings
+    |--------------------------------------------------------------------------
+    |
+    | These values are used to specify where you wish specific actions to
+    | redirect the user. These values should be set to named routes, so
+    | ensure that your redirection is correctly named. If you do not use a
+    | valid named route then this will not correctly redirect the user.
+    |
+    */
+    'redirect' => [
+        /**
+         * Where you would like to redirect the user after successful verification
+         * of their new email address.
+         */
+        'update-confirm' => config('confirm-new-email.route.edit.name'),
+    ],
+
+    /*
+    |--------------------------------------------------------------------------
     | Route Settings
     |--------------------------------------------------------------------------
     |
