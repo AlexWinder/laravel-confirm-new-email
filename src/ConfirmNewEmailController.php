@@ -132,7 +132,7 @@ class ConfirmNewEmailController extends Controller
             session()->flash('status', 'Your e-mail address has been updated.');
 
             // Redirect the user
-            return redirect()->route(config('confirm-new-email.route.edit.name'));
+            return redirect()->route(config('confirm-new-email.redirect.update-confirm'));
         } catch(Exception $e) {
             abort(503, 'We were unable to update your e-mail address.');
         }
