@@ -59,7 +59,6 @@ class EmailUpdatedNotification extends Notification
     {
         return (new MailMessage)
                     ->subject('E-Mail Address Updated')
-                    ->cc($this->old_email)
                     ->markdown('confirm-new-email::mail.email-updated', [
                         'old_email' => $this->old_email,
                         'new_email' => $this->new_email,
