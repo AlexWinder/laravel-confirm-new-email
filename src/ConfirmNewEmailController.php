@@ -3,6 +3,7 @@
 namespace AlexWinder\ConfirmNewEmail;
 
 use AlexWinder\ConfirmNewEmail\ConfirmNewEmailNotification;
+use AlexWinder\ConfirmNewEmail\EmailUpdatedNotification;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Notification;
@@ -22,6 +23,8 @@ class ConfirmNewEmailController extends Controller
 
     /**
      * User has requested an update to their email address, send notification to new email.
+     * 
+     * @return Redirect
      */
     public function requestNewEmail(Request $request)
     {
@@ -72,7 +75,9 @@ class ConfirmNewEmailController extends Controller
     }
 
     /**
-     * Update method - WIP.
+     * Process the update of the users email address.
+     * 
+     * @return Redirect
      */
     public function update(Request $request)
     {
@@ -107,5 +112,18 @@ class ConfirmNewEmailController extends Controller
                 ->update([
                     config('confirm-new-email.user.fields.email') => $request->new_email,
                 ]);
+
+        // Send an email notification to the new email address
+        Notification::route('mail', [
+                            $request->new_email,
+                            $request->old_email,
+                        ])
+                        ->notify(new EmailUpdatedNotification($request));
+        
+        // Set session flash message
+        session()->flash('status', 'Your e-mail address has been updated.');
+        
+        // Redirect the user
+        return redirect()->route(config('confirm-new-email.route.edit.name'));
     }
 }
