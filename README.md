@@ -23,6 +23,10 @@ In your `config/auth.php` ensure that you have correctly specified your User mod
 ],
 ```
 
+## TODO
+
+- Tests.
+
 ## License
 
 This project is licensed under the [MIT License](LICENSE.md).
