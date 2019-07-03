@@ -15,7 +15,7 @@ class ConfirmNewEmailController extends Controller
     /**
      * Display the form to allow the user to update their email address.
      *
-     * @return View
+     * @return \Illuminate\Support\Facades\View
      */
     public function edit()
     {
@@ -25,7 +25,7 @@ class ConfirmNewEmailController extends Controller
     /**
      * User has requested an update to their email address, send notification to new email.
      * 
-     * @return Redirect
+     * @return mixed
      */
     public function requestNewEmail(Request $request)
     {
@@ -83,7 +83,7 @@ class ConfirmNewEmailController extends Controller
     /**
      * Process the update of the users email address.
      * 
-     * @return Redirect
+     * @return mixed
      */
     public function update(Request $request)
     {

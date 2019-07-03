@@ -29,8 +29,7 @@ class EmailUpdatedNotification extends Notification
     /**
      * Create a new notification instance.
      *
-     * @param string $url
-     * @param array $parameters
+     * @param \Illuminate\Http\Request $request
      */
     public function __construct(Request $request)
     {
