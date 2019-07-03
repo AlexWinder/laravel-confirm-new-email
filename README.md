@@ -8,7 +8,7 @@ Require this package into your `composer.json`.
 composer require alexwinder/laravel-confirm-new-email
 ```
 
-Register the [EmailUpdateServiceProvider](src/EmailUpdateServiceProvider.php) in the providers of your Laravel application under `config/app.php` in the `providers` array.
+Register the [ConfirmNewEmailServiceProvider](src/ConfirmNewEmailServiceProvider.php) in the providers of your Laravel application under `config/app.php` in the `providers` array.
 
 ```php
 'providers' => [
