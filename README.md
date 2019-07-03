@@ -12,7 +12,7 @@ Register the [EmailUpdateServiceProvider](src/EmailUpdateServiceProvider.php) in
 ],
 ```
 
-In your `config/auth.php` ensure that you have correctly specified your User model.
+In your `config/auth.php` ensure that you have correctly specified your User model in the `providers` array.
 
 ```php
 'providers' => [
