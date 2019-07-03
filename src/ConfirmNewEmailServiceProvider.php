@@ -26,13 +26,15 @@ class ConfirmNewEmailServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        // Publish package files
+        // Publish view files
         $this->publishes([
-            // Publish config file
-            __DIR__ . '/config/config.php' => config_path('confirm-new-email.php'),
-            // Publish views
             __DIR__.'/views' => resource_path('views/vendor/confirm-new-email'),
-        ]);
+        ], 'views');
+        
+        // Publish config file
+        $this->publishes([
+            __DIR__ . '/config/config.php' => config_path('confirm-new-email.php'),
+        ], 'config');
 
         // Register views
         $this->loadViewsFrom(__DIR__.'/views', 'confirm-new-email');
