@@ -99,27 +99,40 @@ class ConfirmNewEmailController extends Controller
             abort(403, 'Your e-mail address already appears to have been updated. If you wish to attempt to update your e-mail address again please request a new update link.');
         }
 
+        // Get the user model
+        $user_model = config('auth.providers.users.model');
+
         // Check that the new email doesn't exist in the database
-        $user = config('auth.providers.users.model');
-        if($user::where(config('confirm-new-email.user.fields.email'), '=', $request->new_email)->exists())
+        if($user_model::where(config('confirm-new-email.user.fields.email'), '=', $request->new_email)->exists())
         {
             abort(403, 'Your new e-mail address appears to be in use. If you wish to attempt to update your e-mail address again please request a new update link.');
         }
 
         // Check that the old email address could be found
-        if(!$user::where(config('confirm-new-email.user.fields.email'), '=', $request->old_email)->exists())
+        if(!$user_model::where(config('confirm-new-email.user.fields.email'), '=', $request->old_email)->exists())
         {
             abort(403, 'Your e-mail address already appears to have been updated. If you wish to attempt to update your e-mail address again please request a new update link.');
         }
 
         try
         {
-            // Proceed with updating the users email address
-            $user::where(config('confirm-new-email.user.fields.email'), $request->old_email)
-                    ->first()
-                    ->update([
-                        config('confirm-new-email.user.fields.email') => $request->new_email,
-                    ]);
+            // Find the user
+            $user = $user_model::where(config('confirm-new-email.user.fields.email'), $request->old_email)
+                            ->first();
+
+            // Create an array to be used to update the user
+            $update_values = [
+                config('confirm-new-email.user.fields.email') => $request->new_email
+            ];
+            
+            // Check if the verified at date should be updated
+            if(config('confirm-new-email.email-verify'))
+            {
+                $update_values[config('confirm-new-email.user.fields.verified-datetime')] = now()->toDateTimeString();
+            }
+
+            // Proceed with updating the users email address (and other values if required)
+            $user->update($update_values);
 
             // Send an email notification to the new email address
             Notification::route('mail', [
@@ -134,7 +147,7 @@ class ConfirmNewEmailController extends Controller
             // Redirect the user
             return redirect()->route(config('confirm-new-email.redirect.update-confirm'));
         } catch(Exception $e) {
-            abort(503, 'We were unable to update your e-mail address.');
+            abort(503, 'There was an error whilst processing the update of your e-mail address.');
         }
     }
 }
