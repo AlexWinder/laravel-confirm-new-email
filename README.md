@@ -12,14 +12,13 @@ Register the [EmailUpdateServiceProvider](src/EmailUpdateServiceProvider.php) in
 ],
 ```
 
-In your `config/auth.php` ensure that you have correctly specified your User model and the database table in the `providers` array.
+In your `config/auth.php` ensure that you have correctly specified your User model.
 
 ```php
 'providers' => [
     'users' => [
         'driver' => 'eloquent',
         'model' => Namespace\Of\Your\User\Model\User::class,
-        'table' => 'users',
     ],
 ],
 ```
