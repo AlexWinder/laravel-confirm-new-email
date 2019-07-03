@@ -116,10 +116,10 @@ class ConfirmNewEmailController extends Controller
         {
             // Proceed with updating the users email address
             $user::where(config('confirm-new-email.user.fields.email'), $request->old_email)
-            ->first()
-            ->update([
-                config('confirm-new-email.user.fields.email') => $request->new_email,
-            ]);
+                    ->first()
+                    ->update([
+                        config('confirm-new-email.user.fields.email') => $request->new_email,
+                    ]);
 
             // Send an email notification to the new email address
             Notification::route('mail', [
