@@ -2,11 +2,15 @@
 
 ## Installation
 
+### Require Into Composer
+
 Require this package into your `composer.json`.
 
 ```shell
 composer require alexwinder/laravel-confirm-new-email
 ```
+
+### Register Service Provider
 
 Register the [ConfirmNewEmailServiceProvider](src/ConfirmNewEmailServiceProvider.php) in the providers of your Laravel application under `config/app.php` in the `providers` array.
 
@@ -18,6 +22,8 @@ Register the [ConfirmNewEmailServiceProvider](src/ConfirmNewEmailServiceProvider
 ],
 ```
 
+### Confirm User Model
+
 In your `config/auth.php` ensure that you have correctly specified your User model in the `providers` array.
 
 ```php
@@ -27,6 +33,20 @@ In your `config/auth.php` ensure that you have correctly specified your User mod
         'model' => Namespace\Of\Your\User\Model\User::class,
     ],
 ],
+```
+
+### Publish Vendor Files
+
+If you wish, you can publish the configuration file. This will allow you to customise this package to work with your Laravel project. If you do not publish this file then the default values set within [config/config.php](config/config.php) will be used however this may cause some unintended issues with your project.
+
+```shell
+php artisan vendor:publish --provider="AlexWinder\ConfirmNewEmail\ConfirmNewEmailServiceProvider" --tag="config"
+```
+
+This package comes with a number of views for the form and the email markdowns used in this package. If you wish to customise these views for your Laravel project you can do so by publishing with the `views` tag. These files will be published to the `views/vendor/confirm-new-email` directory within your project.
+
+```shell
+php artisan vendor:publish --provider="AlexWinder\ConfirmNewEmail\ConfirmNewEmailServiceProvider" --tag="views"
 ```
 
 ## TODO
