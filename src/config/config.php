@@ -4,6 +4,22 @@ return [
 
     /*
     |--------------------------------------------------------------------------
+    | Email Verify Settings
+    |--------------------------------------------------------------------------
+    |
+    | The email-verify setting is used to determine if the users
+    | email_verified_at value should also be updated when the user confirms
+    | the update of their new email address. When setting this value to true
+    | be sure to check that the user.fields.verified_datetime value is correct
+    | for your user model. You also may need to add the value set in 
+    | user.fields.verified-datetime to your $fillable array in your user model
+    | to allow for mass-assignment. Please see README for further details.
+    | 
+    */
+    'email-verify' => false,
+
+    /*
+    |--------------------------------------------------------------------------
     | Redirect Settings
     |--------------------------------------------------------------------------
     |
@@ -16,9 +32,10 @@ return [
     'redirect' => [
         /**
          * Where you would like to redirect the user after successful verification
-         * of their new email address.
+         * of their new email address. By default this is set to the edit page.
+         * If you edit the name of edit route then be sure to also update this.
          */
-        'update-confirm' => config('confirm-new-email.route.edit.name'),
+        'update-confirm' => 'confirm-new-email.edit',
     ],
 
     /*
@@ -107,7 +124,12 @@ return [
             /**
              * The field of the user table which stores the email address.
              */
-            'email' => 'email'
+            'email' => 'email',
+            /**
+             * The field of the user table which stores the datetime that the 
+             * user was verified.
+             */
+            'verified-datetime' => 'email_verified_at',
         ],
     ],
 ];
