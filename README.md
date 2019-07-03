@@ -1,6 +1,12 @@
 # Verify Updated User Email Address in Laravel 5
 
-## Instructions
+## Installation
+
+Require this package into your `composer.json`.
+
+```shell
+composer require alexwinder/laravel-confirm-new-email
+```
 
 Register the [EmailUpdateServiceProvider](src/EmailUpdateServiceProvider.php) in the providers of your Laravel application under `config/app.php` in the `providers` array.
 
