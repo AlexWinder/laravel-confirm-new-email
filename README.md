@@ -1,4 +1,8 @@
-# Verify Updated User Email Address in Laravel 5
+# Verify Updated User E-Mail Address in Laravel 5
+
+This is a package for [Laravel](https://laravel.com/) which provides functionality that when a user wants to update their e-mail address they must first verify their new e-mail address for it to be successfully updated. This is particularly useful if you want to ensure that a user has control of an e-mail address when they want to make this change to their account.
+
+This is done by sending an e-mail notification to the new users e-mail address, when they click on the link inside that e-mail then their e-mail address will be updated on the system. Upon a successful update of a users e-mail address a second e-mail notification is then sent to the new and the old e-mail address notifying the user of the change to their account.
 
 ## Installation
 
