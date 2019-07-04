@@ -53,6 +53,40 @@ This package comes with a number of views for the form and the email markdowns u
 php artisan vendor:publish --provider="AlexWinder\ConfirmNewEmail\ConfirmNewEmailServiceProvider" --tag="views"
 ```
 
+## Prepare Your Laravel Project
+
+If you choose to use this package there are a number of things of note you should be aware of which may require you making changes to your Laravel project.
+
+1. The views located in [src/views](src/views/) make use of some default Laravel configuration settings. If you opt to use these views without publishing them to your project or configuring them for your use case then you should check that the following are set in your project:
+
+    - `config('app.name')`
+    - `config('app.url')`
+
+2. Your project should be correctly configured with e-mail server settings to allow e-mail verification notifications to be sent via e-mail to the user. To configure your particular use case for your project please consult the [Laravel documentation](https://laravel.com/docs/5.8/mail).
+
+3. Your Eloquent User model should contain an `email` attribute which relates to that users e-mail address. If you are using the default User model/migration provided by Laravel out of the box then it is unlikely that you will need to change this. However, if you have changed the value from its default then the simplest way to resolve this is to define an accessor in your User model for the `email` attribute:
+
+    ```php
+    <?php
+
+    namespace App;
+
+    use Illuminate\Database\Eloquent\Model;
+
+    class User extends Model
+    {
+        /**
+        * Get the user's e-mail address.
+        *
+        * @return string
+        */
+        public function getEmailAttribute()
+        {
+            return $this->your_current_email_address_attribute;
+        }
+    }
+    ```
+
 ## TODO
 
 - Tests.
