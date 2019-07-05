@@ -95,9 +95,9 @@ In the [src/routes.php](src/routes.php) file, a number of routes have been defin
 
 If you choose to use the default views contained within this package you can link to the update form in your views by making use of the following:
 
-    - `route(config('confirm-new-email.route.edit.name'))` is a GET request which will display the form used by the user to request an update to their e-mail address.
-    - `route(config('confirm-new-email.route.update-request.name'))` is a POST request which accepts a `new_email` value for the new users e-mail address. This value is then used to send an e-mail notification to the new e-mail address to confirm the update to the users account.
-    - `route(config('confirm-new-email.route.update-confirm.name'))` is a GET request which processes the update of the users e-mail address once the confirmation link has been clicked.
+- `route(config('confirm-new-email.route.edit.name'))` is a GET request which will display the form used by the user to request an update to their e-mail address.
+- `route(config('confirm-new-email.route.update-request.name'))` is a POST request which accepts a `new_email` value for the new users e-mail address. This value is then used to send an e-mail notification to the new e-mail address to confirm the update to the users account.
+- `route(config('confirm-new-email.route.update-confirm.name'))` is a GET request which processes the update of the users e-mail address once the confirmation link has been clicked.
 
 If you wish you can opt not to use `route(config('confirm-new-email.route.edit.name'))` if you so wish and you can create your own form. However, in your form to make use of this package you must submit with a POST request to `route(config('confirm-new-email.route.update-request.name'))` and you must send a `new_email` value to this route. For example:
 
