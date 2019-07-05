@@ -136,8 +136,14 @@ Please note that this value will be updated to the current datetime stamp as is 
 If you set this value to true you must do the following:
 
 - You must ensure that the field in your project which stores the datetime for the user verified field is correctly set in the config. This is configured in the `config('confirm-new-email.user.fields.verified-datetime')` value.
-- You must ensure that your User model has the user verified field added to its `$fillable` array if you are protecting against mass-assignment. If you are working in a fresh Laravel project, this is often the case. If you do not add this value to the `$fillable` array you will receive a mass-assignment exception. For example:
+- You must ensure that your User model has the user verified field added to its `$fillable` array if you are protecting against mass-assignment. If you are working in a fresh Laravel project this is often the case. If you do not add this value to the `$fillable` array you will receive a mass-assignment exception. For example:
     ```php
+    <?php
+
+    namespace App;
+
+    use Illuminate\Database\Eloquent\Model;
+
     class User extends Authenticatable
     {
         /**
