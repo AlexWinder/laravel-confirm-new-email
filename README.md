@@ -47,7 +47,7 @@ If you wish, you can publish the configuration file with the `config` tag. This 
 php artisan vendor:publish --provider="AlexWinder\ConfirmNewEmail\ConfirmNewEmailServiceProvider" --tag="config"
 ```
 
-This package comes with a number of views for the form and the email markdowns used. If you wish to customise these views for your Laravel project you can do so by publishing with the `views` tag. These files will be published to the `views/vendor/confirm-new-email` directory within the resource path of your project.
+This package comes with a number of views for the form and the e-mail markdowns used. If you wish to customise these views for your Laravel project you can do so by publishing with the `views` tag. These files will be published to the `views/vendor/confirm-new-email` directory within the resource path of your project.
 
 ```shell
 php artisan vendor:publish --provider="AlexWinder\ConfirmNewEmail\ConfirmNewEmailServiceProvider" --tag="views"
@@ -127,7 +127,7 @@ If you wish you can opt not to use `route(config('confirm-new-email.route.edit.n
 
 Whilst every effort has been made to provide detailed information within the configuration file, further information about the configuration values can be found below.
 
-#### Email Verification
+#### E-Mail Verification
 
 `email-verify` is a boolean value which when set to `true` will also update the users verified at datetime.
 
@@ -136,7 +136,7 @@ Please note that this value will be updated to the current datetime stamp as is 
 If you set this value to true you must do the following:
 
 - You must ensure that the field in your project which stores the datetime for the user verified field is correctly set in the config. This is configured in the `config('confirm-new-email.user.fields.verified-datetime')` value.
-- You must ensure that your User model has the user verified field added to its `$fillable` array if you are protecting against mass-assignment. If you are working in a fresh Laravel project this is often the case. If you do not add this value to the `$fillable` array you will receive a mass-assignment exception. For example:
+- You must ensure that your User model has the user verified field added to its `$fillable` array if you are protecting against mass-assignment in your Laravel project, by default all Eloquent models protect against mass-assignment. If you do not add this value to the `$fillable` array you will receive a mass-assignment exception. For example:
     ```php
     <?php
 
@@ -156,6 +156,14 @@ If you set this value to true you must do the following:
         ];
     }
     ```
+
+#### Route URI/Names
+
+
+
+## E-Mail Notifications
+
+
 
 ## TODO
 
