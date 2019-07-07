@@ -211,6 +211,10 @@ The e-mail notifications sent make use of [markdown](https://laravel.com/docs/5.
 
 - Tests.
 
+## Changelog
+
+A changelog of this project can be found in [CHANGELOG.md](CHANGELOG.md).
+
 ## License
 
 This project is licensed under the [MIT License](LICENSE.md).
