@@ -137,6 +137,7 @@ If you set this value to true you must do the following:
 
 - You must ensure that the field in your project which stores the datetime for the user verified field is correctly set in the config. This is configured in the `config('confirm-new-email.user.fields.verified-datetime')` value.
 - You must ensure that your User model has the user verified field added to its `$fillable` array if you are protecting against mass-assignment in your Laravel project, by default all Eloquent models protect against mass-assignment. If you do not add this value to the `$fillable` array you will receive a mass-assignment exception. For example:
+
     ```php
     <?php
 
@@ -157,13 +158,37 @@ If you set this value to true you must do the following:
     }
     ```
 
+#### Redirect
+
+`redirect` is an array of values used to specify named routes used to redirect the user at points in the process.
+
+**Please note that these are named routes and so the named route must exist within your Laravel project.**
+
+- `config('confirm-new-email.redirect.update-confirm)` is the named route of the location that the user will be redirected to upon successful verification of a users new e-mail address. By default this is set to redirect back to [src/view/email-edit.blade.php](src/views/email-edit.blade.php). For more information please see the [Route/URI Names Section](#route-urinames)
+
 #### Route URI/Names
 
+`route` is an array of values used to define the route names and URI's inside the [src/routes.php](src/routes.php) file. If you wish to customise the route name/URI from this package for your Laravel project then you should edit these configuration values.
 
+If you are working from a default Laravel project then you likely do not need to change these values, unless of course you do not like the naming convention. If you have conflicting route names/URI's already in your Laravel project then these default values should be changed.
+
+It should be noted that if you change from the default values for the `config('confirm-new-email.route.edit.name')` then you may also need to update `config('confirm-new-email.redirect.update-confirm')` to match your new route name as listed in [the Redirect section](#redirect).
+
+#### Update Expiry
+
+`update-expiry` is an array of values which is used to set an expiry limit on the e-mail address confirmation. When these values are correctly set the user will have a set number of minutes to confirm their new e-mail address.
+
+- `config('confirm-new-email.update-expiry.enabled')` is a boolean and should be set to a `true` value if you wish to enable this.
+- `config('confirm-new-email.update-expiry.limit')` is an integer which is the number of minutes a user has to confirm their new e-mail address. If this value is set to 0 this will have the same effect as setting a `false` value to `config('confirm-new-email.update-expiry.enabled')`.
+
+#### User Settings
+
+`user` is an array of values which relates to the User model in your Laravel project.
+
+- `config('confirm-new-email.user.email')` is the field for the e-mail address for your User model.
+- `config('confirm-new-email.user.verified-datetime')` is the **datetime** field for when the users e-mail address was verified. Note that this field is required to be part of the `$fillable` array in your User model and you must correctly set the `config('confirm-new-email.email-verify')` value. See [the E-Mail Verification section](#e-mail-verification) for further details.
 
 ## E-Mail Notifications
-
-
 
 ## TODO
 
