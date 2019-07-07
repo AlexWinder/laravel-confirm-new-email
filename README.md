@@ -99,7 +99,7 @@ If you choose to use the default views contained within this package you can lin
 - `route(config('confirm-new-email.route.update-request.name'))` is a POST request which accepts a `new_email` value for the new users e-mail address. This value is then used to send an e-mail notification to the new e-mail address to confirm the update to the users account.
 - `route(config('confirm-new-email.route.update-confirm.name'))` is a GET request which processes the update of the users e-mail address once the confirmation link has been clicked.
 
-If you wish you can opt not to use `route(config('confirm-new-email.route.edit.name'))` if you so wish and you can create your own form. However, in your form to make use of this package you must submit with a POST request to `route(config('confirm-new-email.route.update-request.name'))` and you must send a `new_email` value to this route. For example:
+If you wish you can opt not to use `route(config('confirm-new-email.route.edit.name'))` and you can create your own form. However, in your form to make use of this package you must submit with a POST request to `route(config('confirm-new-email.route.update-request.name'))` and you must send a `new_email` value to this route. For example:
 
 ```html
 <form method="POST" action="{{ route(config('confirm-new-email.route.update-request.name')) }}">
