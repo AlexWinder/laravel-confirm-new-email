@@ -190,6 +190,21 @@ It should be noted that if you change from the default values for the `config('c
 
 ## E-Mail Notifications
 
+When a POST request with a `new_email` value is sent to `config('confirm-new-email.route.update-request.name')` the following happens:
+
+- The new e-mail address is validated to ensure that it has been sent, and hasn't already been persisted in the database.
+- An e-mail notification is then sent to the new e-mail address of the user with a URL which must be vistied to confirm the change to their user account.
+
+This URL will be a signed URL to `config('confirm-new-email.route.update-confirm.name')`. This is a GET request which does the following:
+
+- Several checks are done to ensure that the signed URL is valid, that the users e-mail address hasn't changed or that their new e-mail address has become used between the time of them requesting the update and updating their e-mail address.
+- The users e-mail address is updated.
+- An e-mail notification is sent to the new and old e-mail addresses of the user account, notifying that the e-mail address has been updated on the account.
+
+For both routes the Laravel `auth` middleware is in place - as the user must be fully authenticated to complete the update to their e-mail address.
+
+The e-mail notifications sent make use of [markdown](https://laravel.com/docs/5.8/mail#markdown-mailables). If you wish to edit the content of these e-mails you should [publish the views](#publish-vendor-files) - this will be published to `views/vendor/confirm-new-email` directory within the resource path of your project where you can then edit them to fit your specific needs.
+
 ## TODO
 
 - Tests.
