@@ -87,7 +87,7 @@ If you choose to use this package there are a number of things of note you shoul
     }
     ```
 
-##  Usage
+## Usage
 
 ### Routes
 
