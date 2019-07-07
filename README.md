@@ -172,6 +172,8 @@ If you set this value to true you must do the following:
 
 If you are working from a default Laravel project then you likely do not need to change these values, unless of course you do not like the naming convention. If you have conflicting route names/URI's already in your Laravel project then these default values should be changed.
 
+All of the `name` values for the routes should be unique to each other.
+
 It should be noted that if you change from the default values for the `config('confirm-new-email.route.edit.name')` then you may also need to update `config('confirm-new-email.redirect.update-confirm')` to match your new route name as listed in [the Redirect section](#redirect).
 
 #### Update Expiry
