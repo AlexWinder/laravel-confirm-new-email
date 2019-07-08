@@ -19,5 +19,10 @@
         "illuminate/http": "~5.8",
         "illuminate/notifications": "~5.8",
         "illuminate/support": "~5.8"
-    }
+    },
+	"autoload": {
+		"psr-4": {
+			"AlexWinder\\ConfirmNewEmail\\": "src"
+		}
+	}
 }
