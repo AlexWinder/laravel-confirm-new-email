@@ -1,5 +1,17 @@
 <?php
 
+/*
+|--------------------------------------------------------------------------
+| Confirm New Email Settings
+|--------------------------------------------------------------------------
+|
+| The settings contained within this configuration file relate to
+| the Laravel package to confirm a users new email address.
+| https://github.com/AlexWinder/laravel-confirm-new-email
+| 
+*/
+
+
 return [
 
     /*
