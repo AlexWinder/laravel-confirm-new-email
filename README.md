@@ -28,13 +28,14 @@ Register the [ConfirmNewEmailServiceProvider](src/ConfirmNewEmailServiceProvider
 
 ### Confirm User Model
 
-In your `config/auth.php` ensure that you have correctly specified your User model in the `providers` array.
+In your `config/auth.php` ensure that you have correctly specified your User model and table in the `providers` array.
 
 ```php
 'providers' => [
     'users' => [
         'driver' => 'eloquent',
         'model' => Namespace\Of\Your\User\Model\User::class,
+		'table' => 'users'
     ],
 ],
 ```
