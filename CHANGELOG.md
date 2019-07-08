@@ -2,6 +2,12 @@
 
 All notable changes to this project will be documented in this file.
 
+## [Unreleased]
+
+### Changed
+
+- Updated README to include the user table in config/auth.php .
+
 ## [0.0.2] - 2019-07-08
 
 ### Added
