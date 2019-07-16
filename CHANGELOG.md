@@ -6,7 +6,8 @@ All notable changes to this project will be documented in this file.
 
 ### Changed
 
-- Updated README to include the user table in config/auth.php .
+- Updated README to include the user table in config/auth.php.
+- Updated README to include mass-assignment information about email field in the User model.
 
 ## [0.0.2] - 2019-07-08
 
