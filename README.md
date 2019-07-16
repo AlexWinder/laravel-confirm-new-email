@@ -35,10 +35,36 @@ In your `config/auth.php` ensure that you have correctly specified your User mod
     'users' => [
         'driver' => 'eloquent',
         'model' => Namespace\Of\Your\User\Model\User::class,
-		'table' => 'users'
+        'table' => 'users'
     ],
 ],
 ```
+
+### E-Mail Attribute Mass-Assignment
+
+You must ensure that your User model has the attribute which relates to e-mail address added to its `$fillable` array if you are protecting against mass-assignment in your Laravel project, by default all Eloquent models protect against mass-assignment. If you do not add this value to the `$fillable` array you will receive a mass-assignment exception. For example:
+
+```php
+<?php
+
+namespace App;
+
+use Illuminate\Database\Eloquent\Model;
+
+class User extends Authenticatable
+{
+    /**
+    * The attributes that are mass assignable.
+    *
+    * @var array
+    */
+    protected $fillable = [
+        'name', 'email', 'password',
+    ];
+}
+```
+
+If you also wish to verify e-mail address during update then you should also [add this field](#e-mail-verification) to your `$fillable` array.
 
 ### Publish Vendor Files
 
